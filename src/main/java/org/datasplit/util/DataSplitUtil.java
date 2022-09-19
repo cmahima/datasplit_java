@@ -3,6 +3,7 @@ package org.datasplit.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -49,5 +50,4 @@ public class DataSplitUtil {
             logger.error("Could not read input file. file name = " + argumentParser.getFileLocation(), io);
         }
     }
-
 }

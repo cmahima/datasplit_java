@@ -4,9 +4,13 @@ import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.EnhancedPatternLayout;
 import org.apache.log4j.Level;
 import org.apache.log4j.Priority;
+import org.datasplit.domain.S3Credentials;
+import org.datasplit.s3.S3FileReadUtil;
+import org.datasplit.s3.S3FileWriteUtil;
 import org.datasplit.util.ArgumentParser;
 import org.datasplit.util.DataSplitUtil;
 
+import java.io.File;
 import java.io.IOException;
 
 public class Main {
@@ -15,7 +19,21 @@ public class Main {
         try {
             ArgumentParser argumentParser = new ArgumentParser(args);
             configureConsoleLogging(argumentParser.getDebugLoggingEnabled());
-            DataSplitUtil dataSplitUtil = new DataSplitUtil(argumentParser);
+
+            if (argumentParser.isAWSEnabled()) {
+                S3Credentials s3Credentials = new S3Credentials(argumentParser);
+
+                File inputFile = S3FileReadUtil.readInputFile(argumentParser.getS3BucketName(),
+                        argumentParser.getS3InputFileName());
+                // write input file to tmp
+
+                DataSplitUtil dataSplitUtil = new DataSplitUtil(argumentParser);
+
+                S3FileWriteUtil.writeFileToS3("", new File(argumentParser.getTrainFileLocation()));
+                S3FileWriteUtil.writeFileToS3("", new File(argumentParser.getTestFileLocation()));
+            } else {
+                DataSplitUtil dataSplitUtil = new DataSplitUtil(argumentParser);
+            }
         } catch (Exception e) {
 
         }

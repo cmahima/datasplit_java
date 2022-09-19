@@ -6,12 +6,56 @@ public class ArgumentParser {
     private final String DEBUG_ARG = "--debug.logging.enabled";
     private final String TRAIN_FILE_LOC = "--train.output.location";
     private final String TEST_FILE_LOC = "--test.output.location";
+    private final String S3_BUCKET_NAME = "--aws.s3.bucket.name";
+    private final String S3_INPUT_FILENAME = "--aws.s3.input.file.name";
+    private final String AWS_ACCESS_KEY_ID = "--aws.access.key.id";
+    private final String AWS_S3_SECRETS_KEY = "--aws.s3.secrets.key";
 
+    private String s3BucketName;
+    private String s3InputFileName;
     private String trainFileLocation;
     private String testFileLocation;
     private String fileLocation;
     private Float testTrainSplitPrcnt;
     private Boolean debugLoggingEnabled;
+    private transient String awsAccessKeyId;
+    private transient String awsS3SecretsKey;
+
+    public boolean isAWSEnabled() {
+        return (awsAccessKeyId != null && awsS3SecretsKey != null);
+    }
+
+    public String getAwsAccessKeyId() {
+        return awsAccessKeyId;
+    }
+
+    public void setAwsAccessKeyId(String awsAccessKeyId) {
+        this.awsAccessKeyId = awsAccessKeyId;
+    }
+
+    public String getAwsS3SecretsKey() {
+        return awsS3SecretsKey;
+    }
+
+    public void setAwsS3SecretsKey(String awsS3SecretsKey) {
+        this.awsS3SecretsKey = awsS3SecretsKey;
+    }
+
+    public String getS3BucketName() {
+        return s3BucketName;
+    }
+
+    public void setS3BucketName(String s3BucketName) {
+        this.s3BucketName = s3BucketName;
+    }
+
+    public String getS3InputFileName() {
+        return s3InputFileName;
+    }
+
+    public void setS3InputFileName(String s3InputFileName) {
+        this.s3InputFileName = s3InputFileName;
+    }
 
     public String getTrainFileLocation() {
         return trainFileLocation;
@@ -74,6 +118,9 @@ public class ArgumentParser {
                 showHelp();
                 throw new IllegalArgumentException("Not enough arguments");
             }
+
+            // if aws support is enabled, set trainFileLocation and testFileLocation to tmp folder.
+            // if aws support is enabled, set input file to tmp file read from s3.
         }
     }
 
