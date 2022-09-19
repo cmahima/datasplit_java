@@ -1,4 +1,4 @@
-package org.datasplit;
+package org.datasplit.domain;
 
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 
