@@ -1,8 +1,8 @@
-package org.datasplit;
+package org.datasplit.util;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import org.datasplit.Data;
+import org.datasplit.domain.Data;
 
 
 public class LoadDataSet {

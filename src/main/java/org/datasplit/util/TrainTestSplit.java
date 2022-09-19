@@ -1,6 +1,6 @@
-package org.datasplit;
+package org.datasplit.util;
 import org.apache.commons.math3.util.FastMath;
-import org.datasplit.Data;
+import org.datasplit.domain.Data;
 
 import java.util.Arrays;
 
