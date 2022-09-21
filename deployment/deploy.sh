@@ -9,4 +9,5 @@ java -jar $1 \
 --aws.s3.bucket.name java-boot-camp \
 --aws.s3.input.file.name datasplit/iris.txt \
 --aws.access.key.id  \
---aws.s3.secrets.key
+--aws.s3.secrets.key  \
+

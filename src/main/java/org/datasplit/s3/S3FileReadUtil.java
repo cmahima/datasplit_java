@@ -10,6 +10,6 @@ public class S3FileReadUtil {
     public static S3Object readInputFile(String bucketName, String objectKey, AmazonS3 s3Client){
         S3Object object = s3Client.getObject(new GetObjectRequest(bucketName, objectKey));
 
-        return null;
+        return object;
     }
 }
