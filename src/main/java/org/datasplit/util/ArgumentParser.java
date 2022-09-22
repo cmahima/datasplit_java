@@ -114,13 +114,31 @@ public class ArgumentParser {
             } else if (args[i].equals(TEST_FILE_LOC)) {
                 this.testFileLocation = args[i + 1];
                 i++;
+            } else if (args[i].equals(S3_BUCKET_NAME)) {
+                this.s3BucketName = args[i + 1];
+                i++;
+            } else if (args[i].equals(S3_INPUT_FILENAME)) {
+                this.s3InputFileName = args[i + 1];
+                i++;
+            } else if (args[i].equals(AWS_ACCESS_KEY_ID)) {
+                this.awsAccessKeyId = args[i + 1];
+                i++;
+            } else if (args[i].equals(AWS_S3_SECRETS_KEY)) {
+                this.awsS3SecretsKey = args[i + 1];
+                i++;
             } else {
                 showHelp();
                 throw new IllegalArgumentException("Not enough arguments");
             }
 
+
             // if aws support is enabled, set trainFileLocation and testFileLocation to tmp folder.
             // if aws support is enabled, set input file to tmp file read from s3.
+            if (isAWSEnabled()){
+                this.testFileLocation = new String("./src/main/resources/tmp/irisTest.txt");
+                this.trainFileLocation = new String("./src/main/resources/tmp/irisTrain.txt");
+                this.fileLocation = new String("./src/main/resources/tmp/iris.txt");
+            }
         }
     }
 
