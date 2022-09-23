@@ -44,9 +44,9 @@ public class Main {
                 DataSplitUtil dataSplitUtil = new DataSplitUtil(argumentParser);
 
                 int sepPos = argumentParser.getS3InputFileName().lastIndexOf("/");
-                String s3UploadLocationTrain = argumentParser.getS3BucketName()+argumentParser.getS3InputFileName().substring(0,sepPos)+"/train.txt";
+                String s3UploadLocationTrain = argumentParser.getS3InputFileName().substring(0,sepPos)+"/train.txt";
                 S3FileWriteUtil.writeFileToS3(argumentParser.getS3BucketName(), s3UploadLocationTrain, new File(argumentParser.getTrainFileLocation()),credentialsProvider.s3Client);
-                String s3UploadLocationTest = argumentParser.getS3BucketName()+argumentParser.getS3InputFileName().substring(0,sepPos)+"/test.txt";
+                String s3UploadLocationTest = argumentParser.getS3InputFileName().substring(0,sepPos)+"/test.txt";
                 S3FileWriteUtil.writeFileToS3(argumentParser.getS3BucketName(), s3UploadLocationTest, new File(argumentParser.getTestFileLocation()), credentialsProvider.s3Client);
             } else {
                 DataSplitUtil dataSplitUtil = new DataSplitUtil(argumentParser);

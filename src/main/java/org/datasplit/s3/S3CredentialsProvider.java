@@ -15,7 +15,7 @@ public class S3CredentialsProvider implements AWSCredentialsProvider {
     public AmazonS3 s3Client;
     public S3CredentialsProvider(S3Credentials credentials){
          this.awsCreds = new BasicAWSCredentials(credentials.getAWSAccessKeyId(), credentials.getAWSSecretKey());
-         this.s3Client = AmazonS3ClientBuilder.standard().withRegion(Regions.DEFAULT_REGION)
+         this.s3Client = AmazonS3ClientBuilder.standard().withRegion(Regions.CA_CENTRAL_1)
                 .withCredentials(new AWSStaticCredentialsProvider(this.awsCreds))
                 .build();
     }
